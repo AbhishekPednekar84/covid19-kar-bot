@@ -14,3 +14,9 @@ This repository contains the Python (v3.7) code for the
 4. Install the project dependencies - `pip install -r requirements.txt`
 5. Create a `.env` file and add an environment variable called `TELEGRAM_TOKEN` (refer to `.env.example`)
 6. Run the code - `python bot/server.py` or `python3 bot/server.py`
+
+---
+<p align="center"><img src="https://github.com/AbhishekPednekar84/covid19-kar-bot/blob/master/images/bot1.jpg" alt="Bot1"></p>
+
+---
+<p align="center"><img src="https://github.com/AbhishekPednekar84/covid19-kar-bot/blob/master/images/bot2.jpg" alt="Bot2"></p>
