@@ -1,5 +1,6 @@
 import requests
 from kar_covid_bot import TelegramBot
+from functools import reduce
 
 # Create the bot
 bot = TelegramBot()
@@ -16,15 +17,56 @@ def make_reply(msg):
     return reply
 
 
+def get_dist_data():
+    r = requests.get("https://api.covid19india.org/v2/state_district_wise.json")
+
+    for item in r.json():
+        if item["state"] == "Karnataka":
+            dist_data = item["districtData"]
+
+    return dist_data
+
+
+def get_deltas():
+    dist_data = get_dist_data()
+
+    deltas = [dist_data[j]["delta"] for j in range(len(dist_data))]
+
+    confirmed_delta = reduce(lambda x, y: x + y["confirmed"], deltas, 0)
+    recovered_delta = reduce(lambda x, y: x + y["recovered"], deltas, 0)
+    deceased_delta = reduce(lambda x, y: x + y["deceased"], deltas, 0)
+
+    return {"confirmed": confirmed_delta,
+            "recovered": recovered_delta,
+            "deceased": deceased_delta}
+
+
 def get_kar_stats():
+    dist_cases = []
+    dist_item = ""
+
     r = requests.get("https://api.covid19india.org/v3/data.json")
     kar_total = r.json()["KA"]["total"]
 
-    return f"📊 <strong>Current COVID 19 stats for Karnataka</strong>: \
-                \n\nConfirmed:  <b>{kar_total['confirmed']}</b> \
-                \nRecovered:  <b>{kar_total['recovered']}</b> \
-                \nDeceased:  <b>{kar_total['deceased']}</b> \
-                \nTested:  <b>{kar_total['tested']}</b> \
+    delta_info = get_deltas()
+
+    dist_counts = get_dist_data()
+    
+
+    for count in range(len(dist_counts)):
+        if dist_counts[count]['district'] != "Unknown" and dist_counts[count]['district'] != "Other State":
+            dist_cases.append(f"\n👉  <strong>{dist_counts[count]['district']}</strong> ❗ C: {dist_counts[count]['confirmed']} ❗ R: {dist_counts[count]['recovered']} ❗ D: {dist_counts[count]['deceased']}")
+
+    for item in dist_cases:
+        dist_item += item    
+
+    return f"📊 <strong><u>Current COVID 19 Counts for Karnataka</u></strong>: \
+                \n\n⭕ Confirmed:  <strong>{kar_total['confirmed']}</strong>  [↑ {delta_info['confirmed']}] \
+                \n\n✅ Recovered:  <strong>{kar_total['recovered']}</strong>  [↑ {delta_info['recovered']}] \
+                \n\n❌ Deceased:  <strong>{kar_total['deceased']}</strong>  [↑ {delta_info['deceased']}] \
+                \n\n💉 Tested:  <strong>{kar_total['tested']}</strong> \
+                \n\n\n🔢 <strong><u>District-wise Counts</u></strong> (<strong>C</strong>onfirmed - <strong>R</strong>ecovered - <strong>D</strong>eceased): \
+                \n{dist_item} \
                 \n\nFor more details, check out the <a href='https://kar.covid19-info.website'>Karnataka COVID 19 Tracker</a>."
 
 
