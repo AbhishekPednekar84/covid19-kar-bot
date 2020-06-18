@@ -61,10 +61,10 @@ def get_kar_stats():
         dist_item += item    
 
     return f"📊 <strong><u>Current COVID 19 Counts for Karnataka</u></strong>: \
-                \n\n⭕ Confirmed:  <strong>{kar_total['confirmed']}</strong>  [↑ {delta_info['confirmed']}] \
-                \n\n✅ Recovered:  <strong>{kar_total['recovered']}</strong>  [↑ {delta_info['recovered']}] \
-                \n\n❌ Deceased:  <strong>{kar_total['deceased']}</strong>  [↑ {delta_info['deceased']}] \
-                \n\n💉 Tested:  <strong>{kar_total['tested']}</strong> \
+                \n\n🔸 Confirmed:  <strong>{kar_total['confirmed']}</strong>  [↑ {delta_info['confirmed']}] \
+                \n🔸 Recovered:  <strong>{kar_total['recovered']}</strong>  [↑ {delta_info['recovered']}] \
+                \n🔸 Deceased:  <strong>{kar_total['deceased']}</strong>  [↑ {delta_info['deceased']}] \
+                \n🔸 Tested:  <strong>{kar_total['tested']}</strong> \
                 \n\n\n🔢 <strong><u>District-wise Counts</u></strong> (<strong>C</strong>onfirmed - <strong>R</strong>ecovered - <strong>D</strong>eceased): \
                 \n{dist_item} \
                 \n\nFor more details, check out the <a href='https://kar.covid19-info.website'>Karnataka COVID 19 Tracker</a>."
