@@ -6,12 +6,14 @@ from functools import reduce
 bot = TelegramBot()
 
 
-def make_reply(msg):
+def make_reply(msg, name):
     reply = None
+    name = name if name else "there"
+
     if msg in ["/karcovid", "/karcorona"]:
         reply = get_kar_stats()
     elif msg == "/start":
-        reply = "Hi there 👋"
+        reply = f"Hi {name}! 👋. Use the /karcovid or /karcorona commands for the latest COVID 19 counts from Karnataka."
     else:
         reply = "Oops! I don't recognize that command 😕. Try using /karcovid or /karcorona."
     return reply
@@ -79,26 +81,24 @@ def main():
         print("Firing up the bot...")
         updates = bot.get_updates(offset=update_id)
         updates = updates["result"]
+
         if updates:
 
             for item in updates:
                 update_id = item["update_id"]
 
-                # If the message is edited, the "message" key changes
-                try:
-                    if item["message"]:
-                        message = str(item["message"]["text"])
-                        from_user = item["message"]["from"]["id"]
-                        reply = make_reply(message)
-                    else:
-                        edited_message = str(item["edited_message"]["text"])
-                        from_user = item["edited_message"]["from"]["id"]
-                        reply = make_reply(edited_message)
-                except:
-                    if item["message"]:
-                        message = None
-                    else:
-                        edited_message = None
+                #If the message is edited, the "message" key changes
+                if "message" in item.keys():
+                    message = str(item["message"]["text"])
+                    name = item["message"]["from"]["first_name"]
+                    from_user = item["message"]["from"]["id"]
+                    reply = make_reply(message, name)
+
+                elif "edited_message" in item.keys():
+                    edited_message = str(item["edited_message"]["text"])
+                    name = item["edited_message"]["from"]["first_name"]
+                    from_user = item["edited_message"]["from"]["id"]
+                    reply = make_reply(edited_message, name)
 
                 bot.send_message(reply, from_user)
 
