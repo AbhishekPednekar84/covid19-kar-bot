@@ -1,10 +1,12 @@
 import requests
+import random
 from kar_covid_bot import TelegramBot
 from functools import reduce
 
 # Create the bot
 bot = TelegramBot()
 
+greetings = ["Hi", "Hello", "Namaste", "Namaskara", "ನಮಸ್ಕಾರ"]
 
 def make_reply(msg, name):
     reply = None
@@ -13,7 +15,7 @@ def make_reply(msg, name):
     if msg in ["/karcovid", "/karcorona"]:
         reply = get_kar_stats()
     elif msg == "/start":
-        reply = f"Hi {name}! 👋. Use the /karcovid or /karcorona commands for the latest COVID 19 counts from Karnataka."
+        reply = f"{random.choice(greetings)}, {name}! 👋. Use the /karcovid or /karcorona commands for the latest COVID 19 counts from Karnataka."
     else:
         reply = "Oops! I don't recognize that command 😕. Try using /karcovid or /karcorona."
     return reply
