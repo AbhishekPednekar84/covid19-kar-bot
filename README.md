@@ -8,6 +8,11 @@ This repository contains the Python (v3.7) code for the
 2. Click **START** to begin conversing with the bot
 3. To retrieve the latest COVID 19 stats for Karnataka, send either **/karcovid** or **/karcorona**
 
+## Commands
+1. `/start` - To start interacting with the bot and get a welcome message
+2. `/karcovid` - Retrieve the state and district-wise stats
+3. `/karcorona` - Retrieve the state and district-wise stats
+
 ## Creating a local setup
 
 1. Clone the current repository - `git clone https://github.com/AbhishekPednekar84/covid19-kar-bot`
