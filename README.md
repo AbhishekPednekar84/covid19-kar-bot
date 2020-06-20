@@ -1,5 +1,7 @@
 # Karnataka COVID19 Counts - Telegram Bot
 
+[![Build Status](https://travis-ci.org/AbhishekPednekar84/covid19-kar-bot.svg?branch=master)](https://travis-ci.org/AbhishekPednekar84/covid19-kar-bot)
+
 This repository contains the Python (v3.7) code for the
 
 ## Using the bot
