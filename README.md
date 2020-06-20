@@ -8,7 +8,7 @@ This repository contains the Python (v3.7) code for the
 
 1. Search for the bot in Telegram using either **Karnataka COVID 19 Counts** or **@KarCovid19Bot**
 2. Click **START** to begin conversing with the bot
-3. To retrieve the latest COVID 19 stats for Karnataka, send either **/karcovid** or **/karcorona**
+3. To retrieve the latest COVID 19 stats for Karnataka, send either `/karcovid` or `/karcorona`
 
 ## Commands
 1. `/start` - To start interacting with the bot and get a welcome message
