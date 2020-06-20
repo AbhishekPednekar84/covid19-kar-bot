@@ -140,4 +140,9 @@ dmypy.json
 # VS Code specific
 .vscode
 
+# Pre-commit
+.flake8
+.pre-commit-config.yaml
+pyproject.toml
+
 # End of https://www.toptal.com/developers/gitignore/api/python
