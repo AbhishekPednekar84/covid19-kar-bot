@@ -23,6 +23,7 @@ This repository contains the Python (v3.7) code for the
 4. Install the project dependencies - `pip install -r requirements.txt`
 5. Create a `.env` file and add an environment variable called `TELEGRAM_TOKEN` (refer to `.env.example`)
 6. Run the code - `python bot/server.py` or `python3 bot/server.py`
+7. To run the tests - `pytest`
 
 ---
 
